@@ -21,20 +21,7 @@ const appRouter= createBrowserRouter([{
 
 const Body = () => {
    
-      const dispatch = useDispatch();
-       useEffect(onAuthStateChanged(auth, (user) => {
-        if (user) {
-          
-          const {uid,email,displayName, photoURL} = user;
-  
-          dispatch(addUser({id:uid,email:email, displayName:displayName, photoURL:photoURL}));
-          
-          
-        } else {
-          dispatch(removeUser());
-        }
-      })
-      ,[]);
+      
     
 
   return (

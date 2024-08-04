@@ -7,6 +7,7 @@ import {auth} from "../utils/firebase"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { USER_AVATAR } from '../utils/constants';
 const Login = () => {
     const dispatch= useDispatch()
     const navigate= useNavigate()
@@ -31,13 +32,13 @@ const Login = () => {
 
           //update the name 
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg"
+            displayName: name.current.value, photoURL: USER_AVATAR
           }).then(() => {
             console.log(user);
             const {uid,email,displayName, photoURL} = auth.currentUser;
   
             dispatch(addUser({id:uid,email:email, displayName:displayName, photoURL:photoURL}));
-            navigate("./browse")
+        
           }).catch((error) => { 
             const errorMessage = error.message;
           setErrorMessage(errorMessage);
@@ -56,7 +57,7 @@ const Login = () => {
           // Signed in 
           const user = userCredential.user;
          
-          navigate("./browse")
+          
           
         })
         .catch((error) => {
