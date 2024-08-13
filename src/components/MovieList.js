@@ -1,11 +1,9 @@
-
 import React from 'react'
-import { useSelector } from 'react-redux'
 import MovieCard from './MovieCard'
 
 const MovieList = ({ title, movies}) => {
     return (
-      <div className='mb-8' >
+      <div className='mb-8 py-4' >
         <h1 className='text-3xl text-white p-6'>{title}</h1>
         <div className='flex overflow-x-scroll no-scrollbar pl-2'
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>

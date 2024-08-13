@@ -1,8 +1,5 @@
-
-import React, { useEffect } from 'react'
-import { API_OPTIONS } from '../utils/constants'
-import { useDispatch, useSelector } from 'react-redux';
-import { addVideoTrailer } from '../utils/movieSlice';
+import React from 'react'
+import { useSelector } from 'react-redux';
 import useTrailerVideo from '../hooks/useTrailerVideo';
 
 const VideoBackground = ({id}) => {

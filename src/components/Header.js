@@ -5,13 +5,16 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser, removeUser } from '../utils/userSlice';
 import { LOGO } from '../utils/constants';
+import { toggleGPTSearchView } from '../utils/GPTSlice';
 
 const Header = () => {
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
+    const text= useSelector((state)=>state.gpt.text)
     const dispatch = useDispatch();
 
     const handleSignOut = () => {
+       
         signOut(auth)
             .then(() => {
                 navigate('/');
@@ -21,9 +24,14 @@ const Header = () => {
             });
     };
 
+   const handleGPTSearchClick= ()=>{
+       dispatch(toggleGPTSearchView())
+   }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+
                 const { uid, email, displayName, photoURL } = user;
                 dispatch(addUser({ id: uid, email, displayName, photoURL }));
                 navigate("/browse")
@@ -38,10 +46,11 @@ const Header = () => {
     }, [dispatch,navigate]);
 
     return (
-        <div className='absolute w-screen px-10 py-4 bg-gradient-to-br from-black z-10 flex justify-between'>
+        <div className='absolute w-screen px-10 bg-gradient-to-br from-black py-1 z-10 flex justify-between'>
             <img className="w-56" alt="Netflix Logo" src={LOGO} />
             {user && (
                 <div className='flex items-center'>
+                    <button className='px-2 py-3 font-bold bg-blue-700 text-white mr-4 rounded-md hover:opacity-70' onClick={handleGPTSearchClick}>{text}</button>
                     <img className='w-12 h-12' src={user?.photoURL} alt="userIcon" />
                     <button className='px-1 font-bold text-white' onClick={handleSignOut}>Sign out</button>
                 </div>
